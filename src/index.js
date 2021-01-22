@@ -1,6 +1,5 @@
-import React from 'react'
-import styles from './styles.module.css'
+import CodeHighlighter from './components/CodeHighlighter'
+import languagePython from './highlighter/languages/python'
+import languageVBA from './highlighter/languages/vba'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export { CodeHighlighter, languagePython, languageVBA }

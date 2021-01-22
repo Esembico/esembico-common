@@ -1,0 +1,31 @@
+pre {
+  tab-size: 4;
+  counter-reset: line;
+  overflow-x: auto;
+}
+
+code.line {
+  counter-increment: line;
+}
+code.line::before {
+  content: counter(line);
+  display: inline-block;
+  width: 1.5em;
+  border-right: 1px solid #ddd;
+  padding: 0 0.5em;
+  margin-right: 0.5em;
+  color: #888;
+}
+
+.keyword {
+  color: papayawhip;
+}
+.string {
+  color: brown;
+}
+.number {
+  color: orange;
+}
+.comment {
+  color: green;
+}
