@@ -7,88 +7,88 @@ function tokenize(
 
   for (let index = 0; index < code.length; index++) {
     const ch = code[index];
-    if (currentToken.type === "comment" && !/\r|\n/.test(ch)) {
+    if (currentToken.type === 'comment' && !/\r|\n/.test(ch)) {
       currentToken.value += ch;
       continue;
     }
-    if (currentToken.type === "string") {
+    if (currentToken.type === 'string') {
       currentToken.value += ch;
       if (stringCharacters.includes(ch)) {
         tokens.push(currentToken);
         currentToken = {
-          type: "null",
-          value: "",
+          type: 'null',
+          value: ''
         };
       }
       continue;
     }
-    if (ch === "." && currentToken.type === "number") {
+    if (ch === '.' && currentToken.type === 'number') {
       currentToken.value += ch;
       continue;
     }
     if (specialCharacters.includes(ch)) {
       tokens.push(currentToken);
       currentToken = {
-        type: "special_character",
-        value: ch,
+        type: 'special_character',
+        value: ch
       };
       continue;
     }
     if (/\s/.test(ch)) {
-      if (currentToken.type === "whitespace") {
+      if (currentToken.type === 'whitespace') {
         currentToken.value += ch;
       } else {
         tokens.push(currentToken);
         currentToken = {
-          type: "whitespace",
-          value: ch,
+          type: 'whitespace',
+          value: ch
         };
       }
       continue;
     }
-    if (ch >= "0" && ch <= "9") {
-      if (currentToken.type === "number") {
+    if (ch >= '0' && ch <= '9') {
+      if (currentToken.type === 'number') {
         currentToken.value += ch;
       } else {
         tokens.push(currentToken);
         currentToken = {
-          type: "number",
-          value: ch,
+          type: 'number',
+          value: ch
         };
       }
       continue;
     }
     if (stringCharacters.includes(ch)) {
-      if (currentToken.type === "string") {
+      if (currentToken.type === 'string') {
         currentToken.value += ch;
       } else {
         tokens.push(currentToken);
         currentToken = {
-          type: "string",
-          value: ch,
+          type: 'string',
+          value: ch
         };
       }
       continue;
     }
     if (ch === commentCharacter) {
-      if (currentToken.type === "comment") {
+      if (currentToken.type === 'comment') {
         currentToken.value += ch;
       } else {
         tokens.push(currentToken);
         currentToken = {
-          type: "comment",
-          value: ch,
+          type: 'comment',
+          value: ch
         };
       }
       continue;
     }
-    if (currentToken.type === "text") {
+    if (currentToken.type === 'text') {
       currentToken.value += ch;
     } else {
       tokens.push(currentToken);
       currentToken = {
-        type: "text",
-        value: ch,
+        type: 'text',
+        value: ch
       };
     }
   }
@@ -100,23 +100,23 @@ function tokenize(
 export function highlight(code, language) {
   const { tokens, keywords } = language(code, tokenize);
 
-  let newCode = "";
+  let newCode = '';
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
-    if (token.type === "text" && keywords.includes(token.value.toLowerCase())) {
+    if (token.type === 'text' && keywords.includes(token.value.toLowerCase())) {
       newCode += `<span class="keyword">${token.value}</span>`;
       continue;
     }
-    if (token.type === "number") {
+    if (token.type === 'number') {
       newCode += `<span class="number">${token.value}</span>`;
       continue;
     }
-    if (token.type === "comment") {
+    if (token.type === 'comment') {
       newCode += `<span class="comment">${token.value}</span>`;
       continue;
     }
-    if (token.type === "string") {
+    if (token.type === 'string') {
       newCode += `<span class="string">${token.value}</span>`;
       continue;
     }
@@ -124,11 +124,10 @@ export function highlight(code, language) {
   }
   newCode = newCode
     .trim()
-    .split("\n")
+    .split('\n')
     .map(function (line) {
       return `<code class="line">${line.trimEnd()}</code>`;
     })
-    .join("\n");
-  //codeBlock.innerHTML = newCode;
+    .join('\n');
   return newCode;
 }
