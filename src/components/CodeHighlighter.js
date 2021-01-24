@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { highlight } from '../highlighter'
 
-import '../css/CodeHighlighter.css'
-
 export default function CodeHighligher({
   getLanguageFunction,
   children,
