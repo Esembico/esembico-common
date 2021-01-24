@@ -5,8 +5,7 @@
   "author": "Esembico",
   "license": "MIT",
   "repository": "Esembico/esembico-common",
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "main": "dist/js/index.js",
   "source": "src/index.js",
   "engines": {
     "node": ">=10"
