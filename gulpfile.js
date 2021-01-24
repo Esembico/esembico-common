@@ -20,18 +20,18 @@ const buildJs = (cb) => {
   cb()
 }
 
-const buildCss = (cb) => {
-  src(globsCss).pipe(dest('dist/css'))
+const buildStyles = (cb) => {
+  src(globsCss).pipe(dest('dist/styles'))
   cb()
 }
 
 const build = (cb) => {
-  series(clean, buildJs, buildCss)()
+  series(clean, buildJs, buildStyles)()
   cb()
 }
 
 const watchTask = (cb) => {
-  watch('src/**', series(clean, buildJs, buildCss))
+  watch('src/**', series(clean, buildJs, buildStyles))
   cb()
 }
 
